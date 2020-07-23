@@ -890,4 +890,33 @@ describe('test category legend', () => {
       expect(legend.destroyed).toBe(true);
     });
   });
+
+  describe('test legend init offsetX, offsetY', () => {
+    const container = canvas.addGroup();
+    const legend = new CategroyLegend({
+      id: 'c',
+      container,
+      x: 100,
+      y: 100,
+      offsetX: 100,
+      offsetY: 150,
+      items: originItems,
+    });
+
+    legend.init();
+
+    it('offsetX, offsetY', () => {
+      legend.render();
+      const bbox = legend.get('group').getCanvasBBox();
+      expect(bbox.minX).toBe(200);
+      expect(bbox.minY).toBe(250);
+      expect(bbox.width).toBe(bbox.maxX - bbox.minX);
+      expect(bbox.height).toBe(bbox.maxY - bbox.minY);
+    });
+
+    it('destroy', () => {
+      legend.destroy();
+      expect(legend.destroyed).toBe(true);
+    });
+  });
 });

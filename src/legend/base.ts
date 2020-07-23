@@ -36,8 +36,9 @@ abstract class LegendBase<T extends LegendBaseCfg = LegendBaseCfg> extends Group
     const maxHeight = this.get('maxHeight');
     const minX = x + offsetX;
     const minY = y + offsetY;
-    let width = bbox.maxX - minX;
-    let height = bbox.maxY - minY;
+
+    let width = Math.max(bbox.maxX - minX, bbox.width);
+    let height = Math.max(bbox.maxY - minY, bbox.height);
     if (maxWidth) {
       width = Math.min(width, maxWidth);
     }
